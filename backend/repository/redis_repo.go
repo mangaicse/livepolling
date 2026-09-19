@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -33,11 +34,23 @@ type realRedisRepo struct {
 }
 
 func NewRedisRepository(redisURI, password string) RedisRepository {
-	opts, err := redis.ParseURL(redisURI)
+	trimmedURI := strings.TrimSpace(redisURI)
+
+	// If Upstash endpoint without rediss:// prefix, automatically format as TLS URL
+	if strings.Contains(trimmedURI, "upstash.io") && !strings.HasPrefix(trimmedURI, "rediss://") {
+		cleanAddr := strings.TrimPrefix(trimmedURI, "redis://")
+		if password != "" {
+			trimmedURI = fmt.Sprintf("rediss://default:%s@%s", password, cleanAddr)
+		} else {
+			trimmedURI = fmt.Sprintf("rediss://%s", cleanAddr)
+		}
+	}
+
+	opts, err := redis.ParseURL(trimmedURI)
 	if err != nil {
 		// Treat as address host:port
 		opts = &redis.Options{
-			Addr:     redisURI,
+			Addr:     trimmedURI,
 			Password: password,
 			DB:       0,
 		}
