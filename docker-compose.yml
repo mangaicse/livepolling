@@ -1,0 +1,43 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: livepoll-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=livepoll
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: livepoll-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: livepoll-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - MONGO_URI=mongodb://mongodb:27017
+      - MONGO_DB_NAME=livepoll
+      - REDIS_URI=redis:6379
+      - JWT_SECRET=livepoll_production_super_secret_key_2026!
+      - GIN_MODE=release
+    depends_on:
+      - mongodb
+      - redis
+
+volumes:
+  mongo_data:
+  redis_data:

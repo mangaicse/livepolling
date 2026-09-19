@@ -1,0 +1,36 @@
+# Binaries & executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+backend/server.exe
+server.exe
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Production build artifacts
+dist/
+frontend/dist/
+
+# Environment files
+.env
+.env.local
+backend/.env
+frontend/.env
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Scratch and OS files
+scratch/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
