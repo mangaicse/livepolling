@@ -92,8 +92,20 @@ func main() {
 	})
 
 	// Optional: Serve frontend static build if frontend/dist exists
-	distPath := filepath.Join("..", "frontend", "dist")
-	if _, err := os.Stat(distPath); err == nil {
+	possibleDistPaths := []string{
+		filepath.Join(".", "frontend", "dist"),
+		filepath.Join("..", "frontend", "dist"),
+		"/frontend/dist",
+		"/app/frontend/dist",
+	}
+	var distPath string
+	for _, p := range possibleDistPaths {
+		if info, err := os.Stat(p); err == nil && info.IsDir() {
+			distPath = p
+			break
+		}
+	}
+	if distPath != "" {
 		log.Printf("📦 Serving static frontend from %s", distPath)
 		r.Static("/assets", filepath.Join(distPath, "assets"))
 		r.NoRoute(func(c *gin.Context) {

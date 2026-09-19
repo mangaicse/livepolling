@@ -11,7 +11,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Step 2: Build Go Backend
-FROM golang:1.24-alpine AS backend-builder
+FROM golang:1.23-alpine AS backend-builder
 WORKDIR /app/backend
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
@@ -25,6 +25,7 @@ WORKDIR /app
 RUN apk --no-cache add ca-certificates tzdata
 
 COPY --from=backend-builder /app/server /app/server
+COPY --from=frontend-builder /app/frontend/dist /app/frontend/dist
 COPY --from=frontend-builder /app/frontend/dist /frontend/dist
 
 ENV PORT=8080
