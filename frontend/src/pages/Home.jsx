@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
-import { Zap, Radio, Users, ShieldCheck, ArrowRight, Sparkles, QrCode } from 'lucide-react';
+import { Radio, ArrowRight, Sparkles, User, GraduationCap, Mail } from 'lucide-react';
 
 export const Home = ({ onNavigate, onJoinPoll }) => {
   const { isAuthenticated } = useAuth();
@@ -127,66 +127,97 @@ export const Home = ({ onNavigate, onJoinPoll }) => {
         )}
       </div>
 
-      {/* Features Showcase */}
-      <div className="grid-3" style={{ textAlign: 'left', marginTop: '2rem' }}>
-        <div className="glass-card" style={{ padding: '1.75rem' }}>
-          <div style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            background: 'rgba(99, 102, 241, 0.15)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '1rem',
-            color: 'var(--accent-primary)',
-          }}>
-            <Zap size={22} />
+      {/* Developer Information Section */}
+      <div style={{ maxWidth: '640px', margin: '2rem auto 0 auto', textAlign: 'left' }}>
+        <div className="glass-card-glow" style={{ padding: '2rem 2.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.25rem' }}>
+            <span className="badge badge-code" style={{ fontSize: '0.75rem' }}>
+              Project Creator
+            </span>
+            <h3 style={{ fontSize: '1.35rem', margin: 0 }}>Developer Information</h3>
           </div>
-          <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Zero-Refresh Live Feed</h4>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-            Built on WebSockets and Redis Pub/Sub for sub-millisecond atomic broadcasting across hundreds of audience screens.
-          </p>
-        </div>
 
-        <div className="glass-card" style={{ padding: '1.75rem' }}>
-          <div style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            background: 'rgba(16, 185, 129, 0.15)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '1rem',
-            color: 'var(--accent-emerald)',
-          }}>
-            <QrCode size={22} />
-          </div>
-          <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Instant QR Code Scan</h4>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-            Presenters can project an instant high-res QR code. Audience members scan with mobile cameras to vote immediately.
-          </p>
-        </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
+                background: 'rgba(99, 102, 241, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--accent-primary)',
+              }}>
+                <User size={20} />
+              </div>
+              <div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Developer Name
+                </div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Mangai
+                </div>
+              </div>
+            </div>
 
-        <div className="glass-card" style={{ padding: '1.75rem' }}>
-          <div style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            background: 'rgba(244, 63, 94, 0.15)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '1rem',
-            color: 'var(--accent-rose)',
-          }}>
-            <ShieldCheck size={22} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
+                background: 'rgba(16, 185, 129, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--accent-emerald)',
+              }}>
+                <GraduationCap size={20} />
+              </div>
+              <div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  College Name
+                </div>
+                <div style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Annapoorana Engineering College
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
+                background: 'rgba(56, 189, 248, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--accent-cyan)',
+              }}>
+                <Mail size={20} />
+              </div>
+              <div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Email Address
+                </div>
+                <a
+                  href="mailto:mangaicse@aecsalem.edu.in"
+                  style={{
+                    fontSize: '1.05rem',
+                    fontWeight: 600,
+                    color: 'var(--accent-primary)',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                  }}
+                >
+                  mangaicse@aecsalem.edu.in
+                </a>
+              </div>
+            </div>
           </div>
-          <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Fraud & Duplicate Guard</h4>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-            Atomic Redis set deduplication prevents ballot-box stuffing, ensuring one vote per participant device.
-          </p>
         </div>
       </div>
     </div>
